@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GoblinMine.Game.Player.Command
+namespace _Project.GoblinMine.Game.Player.Command
 {
     public class GetNormalizedMoveDirectionCommand
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GoblinMine.Game.Player.Configuration
+namespace _Project.GoblinMine.Game.Player.Configuration
 {
     [CreateAssetMenu(
         menuName = "Configuration/Game/Player/PlayerConfiguration",

@@ -1,8 +1,8 @@
 using System;
-using GoblinMine.Game.Resource.Configuration;
-using GoblinMine.Game.Resource.Model;
+using _Project.GoblinMine.Game.Resource.Configuration;
+using _Project.GoblinMine.Game.Resource.Model;
 
-namespace GoblinMine.Game.Resource.Command
+namespace _Project.GoblinMine.Game.Resource.Command
 {
     public class CreateResourceModelCommand
     {

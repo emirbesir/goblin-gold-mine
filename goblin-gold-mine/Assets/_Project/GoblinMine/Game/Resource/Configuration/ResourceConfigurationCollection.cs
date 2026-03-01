@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GoblinMine.Game.Resource.Configuration
+namespace _Project.GoblinMine.Game.Resource.Configuration
 {
     [CreateAssetMenu(
         menuName = "Configuration/Game/Resource/ResourceConfigurationCollection",

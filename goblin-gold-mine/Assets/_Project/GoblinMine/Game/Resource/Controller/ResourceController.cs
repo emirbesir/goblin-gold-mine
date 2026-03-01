@@ -1,15 +1,16 @@
 using System;
-using GoblinMine.Game.Player.View;
-using GoblinMine.Game.Resource.Command;
-using GoblinMine.Game.Resource.Configuration;
-using GoblinMine.Game.Resource.Repository;
-using GoblinMine.Game.Resource.View;
+using _Project.Shared.Initializable;
+using _Project.GoblinMine.Game.Player.View;
+using _Project.GoblinMine.Game.Resource.Command;
+using _Project.GoblinMine.Game.Resource.Configuration;
+using _Project.GoblinMine.Game.Resource.Repository;
+using _Project.GoblinMine.Game.Resource.View;
 using UnityEngine;
 using Zenject;
 
-namespace GoblinMine.Game.Resource.Controller
+namespace _Project.GoblinMine.Game.Resource.Controller
 {
-    public class ResourceController : IInitializable
+    public class ResourceController : IPreInitializable
     {
         private readonly ResourceConfigurationCollection _resourceConfigurationCollection;
         private readonly ResourceRepository _resourceRepository;
@@ -34,7 +35,7 @@ namespace GoblinMine.Game.Resource.Controller
             _resourceViewFactory = resourceViewFactory;
         }
 
-        public void Initialize()
+        public void PreInitialize()
         {
             foreach (var config in _resourceConfigurationCollection.Configurations)
             {

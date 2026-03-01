@@ -1,15 +1,14 @@
 using _Project.GoblinMine.Game.Bootstrap;
-using GoblinMine.Game.Player.Command;
-using GoblinMine.Game.Player.Configuration;
-using GoblinMine.Game.Player.Controller;
-using GoblinMine.Game.Player.Repository;
-using GoblinMine.Game.Player.View;
-using GoblinMine.Game.Resource.Command;
-using GoblinMine.Game.Resource.Configuration;
-using GoblinMine.Game.Resource.Controller;
-using GoblinMine.Game.Resource.Repository;
-using GoblinMine.Game.Resource.Signal;
-using GoblinMine.Game.Resource.View;
+using _Project.GoblinMine.Game.Player.Command;
+using _Project.GoblinMine.Game.Player.Configuration;
+using _Project.GoblinMine.Game.Player.Controller;
+using _Project.GoblinMine.Game.Player.Repository;
+using _Project.GoblinMine.Game.Player.View;
+using _Project.GoblinMine.Game.Resource.Command;
+using _Project.GoblinMine.Game.Resource.Configuration;
+using _Project.GoblinMine.Game.Resource.Controller;
+using _Project.GoblinMine.Game.Resource.Repository;
+using _Project.GoblinMine.Game.Resource.View;
 using UnityEngine;
 using Zenject;
 

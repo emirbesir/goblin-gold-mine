@@ -1,7 +1,7 @@
-using GoblinMine.Game.Player.Configuration;
-using GoblinMine.Game.Player.Model;
+using _Project.GoblinMine.Game.Player.Configuration;
+using _Project.GoblinMine.Game.Player.Model;
 
-namespace GoblinMine.Game.Player.Command
+namespace _Project.GoblinMine.Game.Player.Command
 {
     public class CreatePlayerModelCommand
     {

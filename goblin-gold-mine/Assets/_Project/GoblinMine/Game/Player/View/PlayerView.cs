@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GoblinMine.Game.Player.View
+namespace _Project.GoblinMine.Game.Player.View
 {
     public class PlayerView : MonoBehaviour
     {

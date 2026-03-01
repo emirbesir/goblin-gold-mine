@@ -1,6 +1,6 @@
-using GoblinMine.Game.Player.Model;
+using _Project.GoblinMine.Game.Player.Model;
 
-namespace GoblinMine.Game.Player.Repository
+namespace _Project.GoblinMine.Game.Player.Repository
 {
     public class PlayerRepository
     {

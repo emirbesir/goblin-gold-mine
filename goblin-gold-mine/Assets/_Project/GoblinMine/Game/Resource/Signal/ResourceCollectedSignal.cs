@@ -1,7 +1,7 @@
 using ArvisGames.SignalFlow;
-using GoblinMine.Game.Resource.Model;
+using _Project.GoblinMine.Game.Resource.Model;
 
-namespace GoblinMine.Game.Resource.Signal
+namespace _Project.GoblinMine.Game.Resource.Signal
 {
     public class ResourceCollectedSignal : ISignal
     {

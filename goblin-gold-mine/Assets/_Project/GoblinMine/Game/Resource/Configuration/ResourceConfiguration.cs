@@ -1,7 +1,7 @@
-using GoblinMine.Game.Resource.Model;
+using _Project.GoblinMine.Game.Resource.Model;
 using UnityEngine;
 
-namespace GoblinMine.Game.Resource.Configuration
+namespace _Project.GoblinMine.Game.Resource.Configuration
 {
     [CreateAssetMenu(
         menuName = "Configuration/Game/Resource/ResourceConfiguration",

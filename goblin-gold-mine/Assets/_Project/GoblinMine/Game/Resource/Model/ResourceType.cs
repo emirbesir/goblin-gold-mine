@@ -1,4 +1,4 @@
-namespace GoblinMine.Game.Resource.Model
+namespace _Project.GoblinMine.Game.Resource.Model
 {
     public enum ResourceType
     {

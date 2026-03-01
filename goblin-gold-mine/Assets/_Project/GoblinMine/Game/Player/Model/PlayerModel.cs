@@ -1,4 +1,4 @@
-namespace GoblinMine.Game.Player.Model
+namespace _Project.GoblinMine.Game.Player.Model
 {
     public class PlayerModel
     {

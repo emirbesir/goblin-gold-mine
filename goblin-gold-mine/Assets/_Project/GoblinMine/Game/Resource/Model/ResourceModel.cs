@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace GoblinMine.Game.Resource.Model
+namespace _Project.GoblinMine.Game.Resource.Model
 {
     public class ResourceModel
     {

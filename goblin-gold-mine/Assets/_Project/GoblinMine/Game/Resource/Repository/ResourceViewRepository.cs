@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using GoblinMine.Game.Resource.View;
+using _Project.GoblinMine.Game.Resource.View;
 
-namespace GoblinMine.Game.Resource.Repository
+namespace _Project.GoblinMine.Game.Resource.Repository
 {
     public class ResourceViewRepository
     {

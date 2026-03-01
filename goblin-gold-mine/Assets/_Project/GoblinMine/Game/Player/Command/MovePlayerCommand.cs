@@ -1,8 +1,8 @@
-using GoblinMine.Game.Player.Repository;
-using GoblinMine.Game.Player.View;
+using _Project.GoblinMine.Game.Player.Repository;
+using _Project.GoblinMine.Game.Player.View;
 using UnityEngine;
 
-namespace GoblinMine.Game.Player.Command
+namespace _Project.GoblinMine.Game.Player.Command
 {
     public class MovePlayerCommand
     {

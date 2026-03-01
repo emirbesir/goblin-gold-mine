@@ -1,10 +1,10 @@
-using GoblinMine.Game.Resource.Model;
-using GoblinMine.Game.Resource.Repository;
-using GoblinMine.Game.Resource.Signal;
+using _Project.GoblinMine.Game.Resource.Model;
+using _Project.GoblinMine.Game.Resource.Repository;
+using _Project.GoblinMine.Game.Resource.Signal;
 using Zenject;
 using UnityEngine;
 
-namespace GoblinMine.Game.Resource.Command
+namespace _Project.GoblinMine.Game.Resource.Command
 {
     public class CollectResourceCommand
     {

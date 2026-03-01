@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using Zenject;
 
-namespace GoblinMine.Game.Resource.View
+namespace _Project.GoblinMine.Game.Resource.View
 {
     public class ResourceView : MonoBehaviour
     {
