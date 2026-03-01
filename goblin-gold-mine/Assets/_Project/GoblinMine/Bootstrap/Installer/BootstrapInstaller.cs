@@ -14,10 +14,5 @@ namespace _Project.GoblinMine.Bootstrap.Installer
         {
             Container.BindInterfacesAndSelfTo<BootstrapController>().AsSingle().NonLazy();
         }
-
-        public override void Start()
-        {
-            base.Start();
-        }
     }
 }
