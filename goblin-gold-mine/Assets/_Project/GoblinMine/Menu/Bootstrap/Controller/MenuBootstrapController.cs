@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using _Project.Shared.Initializable;
 using Zenject;
 
-namespace _Project.GoblinMine.Menu.Bootstrap
+namespace _Project.GoblinMine.Menu.Bootstrap.Controller
 {
     public class MenuBootstrapController : IInitializable
     {

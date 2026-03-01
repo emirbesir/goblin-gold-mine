@@ -1,8 +1,7 @@
+using Zenject;
 using _Project.GoblinMine.Game.Resource.Model;
 using _Project.GoblinMine.Game.Resource.Repository;
 using _Project.GoblinMine.Game.Resource.Signal;
-using Zenject;
-using UnityEngine;
 using _Project.GoblinMine.Game.Resource.View;
 
 namespace _Project.GoblinMine.Game.Resource.Command

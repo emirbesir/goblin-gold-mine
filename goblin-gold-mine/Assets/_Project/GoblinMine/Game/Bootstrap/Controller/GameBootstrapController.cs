@@ -2,7 +2,7 @@ using _Project.Shared.Initializable;
 using System.Collections.Generic;
 using Zenject;
 
-namespace _Project.GoblinMine.Game.Bootstrap
+namespace _Project.GoblinMine.Game.Bootstrap.Controller
 {
     public class GameBootstrapController : IInitializable
     {

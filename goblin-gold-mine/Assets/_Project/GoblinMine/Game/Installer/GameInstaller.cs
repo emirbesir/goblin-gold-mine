@@ -1,4 +1,4 @@
-using _Project.GoblinMine.Game.Bootstrap;
+using _Project.GoblinMine.Game.Bootstrap.Controller;
 using _Project.GoblinMine.Game.Player.Command;
 using _Project.GoblinMine.Game.Player.Configuration;
 using _Project.GoblinMine.Game.Player.Controller;

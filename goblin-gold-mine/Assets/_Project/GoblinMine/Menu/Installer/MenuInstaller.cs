@@ -1,4 +1,4 @@
-using _Project.GoblinMine.Menu.Bootstrap;
+using _Project.GoblinMine.Menu.Bootstrap.Controller;
 using Zenject;
 
 namespace _Project.GoblinMine.Menu.Installer
