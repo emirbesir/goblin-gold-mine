@@ -20,8 +20,7 @@ namespace _Project.GoblinMine.Game.Player.Command
         public void Execute(Vector3 moveDirection)
         {
             var moveAmount = moveDirection * _playerRepository.Player.MoveSpeedUnitsPerSecond * Time.deltaTime;
-            var newPosition = _playerView.transform.position + moveAmount;
-            _playerView.SetPosition(newPosition);
+            _playerView.CharacterController.Move(moveAmount);
         }
     }
 }
