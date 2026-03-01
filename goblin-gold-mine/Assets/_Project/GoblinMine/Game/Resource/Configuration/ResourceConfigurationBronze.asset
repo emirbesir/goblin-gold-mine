@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GoblinMine.Game.Resource.Configuration.ResourceConfiguration
   resourceType: 0
   displayName: Bronze
-  material: {fileID: 2100000, guid: 503e3652defc6714caa42da628e5b500, type: 2}
-  value: 5
-  collectionIntervalSeconds: 5
+  material: {fileID: 2100000, guid: e2aaa2099c8673b4ebe80c694a22f835, type: 2}
+  goldValue: 10
+  collectionAmount: 1
+  collectionIntervalSeconds: 1

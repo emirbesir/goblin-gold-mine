@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c5b5eef56c69afd4a8e024f55ba856a7, type: 3}
-  m_Name: ResourceConfigurationGold
+  m_Name: ResourceConfigurationSilver
   m_EditorClassIdentifier: Assembly-CSharp::GoblinMine.Game.Resource.Configuration.ResourceConfiguration
-  resourceType: 2
-  displayName: Gold
-  material: {fileID: 2100000, guid: 638dd7b777a6e1f4eadf1ab85a9e7e02, type: 2}
-  goldValue: 50
+  resourceType: 1
+  displayName: Silver
+  material: {fileID: 2100000, guid: 548ec1d48200b654cac08a53565c03b2, type: 2}
+  goldValue: 20
   collectionAmount: 1
-  collectionIntervalSeconds: 3
+  collectionIntervalSeconds: 2

@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GoblinMine.Game.Resource.Configuration.ResourceConfigurationCollection
   configurations:
   - {fileID: 11400000, guid: fe5422ce55f35364ba3b6ece17843e90, type: 2}
+  - {fileID: 11400000, guid: 340a5f1bcd36af84781561fa0f5c2621, type: 2}
   - {fileID: 11400000, guid: 3348642cc5c88de4fbce38c4e658d6f6, type: 2}
