@@ -1,11 +1,12 @@
 using GoblinMine.Game.Player.Command;
 using GoblinMine.Game.Player.Repository;
+using GoblinMine.Game.Player.View;
 using UnityEngine;
 using Zenject;
 
 namespace GoblinMine.Game.Player.Controller
 {
-    public class PlayerController : IInitializable,ITickable
+    public class PlayerController : IInitializable, ITickable
     {
         private readonly PlayerRepository _playerRepository;
         private readonly CreatePlayerModelCommand _createPlayerModelCommand;
@@ -13,7 +14,6 @@ namespace GoblinMine.Game.Player.Controller
         private readonly GetNormalizedMoveDirectionCommand _getNormalizedMoveDirectionCommand;
 
         public PlayerController(
-
             PlayerRepository playerRepository,
             CreatePlayerModelCommand createPlayerModelCommand,
             MovePlayerCommand movePlayerCommand,
@@ -32,7 +32,7 @@ namespace GoblinMine.Game.Player.Controller
         }
 
         public void Tick()
-        {   
+        {
             var moveDirection = _getNormalizedMoveDirectionCommand.Execute();
 
             if (Mathf.Abs(moveDirection.magnitude) > 0.01f)
