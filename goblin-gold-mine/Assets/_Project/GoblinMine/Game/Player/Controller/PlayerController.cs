@@ -11,18 +11,18 @@ namespace _Project.GoblinMine.Game.Player.Controller
         private readonly PlayerRepository _playerRepository;
         private readonly CreatePlayerModelCommand _createPlayerModelCommand;
         private readonly MovePlayerCommand _movePlayerCommand;
-        private readonly GetNormalizedMoveDirectionCommand _getNormalizedMoveDirectionCommand;
+        private readonly GetMoveDirectionCommand _getMoveDirectionCommand;
 
         public PlayerController(
             PlayerRepository playerRepository,
             CreatePlayerModelCommand createPlayerModelCommand,
             MovePlayerCommand movePlayerCommand,
-            GetNormalizedMoveDirectionCommand getNormalizedMoveDirectionCommand)
+            GetMoveDirectionCommand getMoveDirectionCommand)
         {
             _playerRepository = playerRepository;
             _createPlayerModelCommand = createPlayerModelCommand;
             _movePlayerCommand = movePlayerCommand;
-            _getNormalizedMoveDirectionCommand = getNormalizedMoveDirectionCommand;
+            _getMoveDirectionCommand = getMoveDirectionCommand;
         }
 
         public void PreInitialize()
@@ -33,7 +33,7 @@ namespace _Project.GoblinMine.Game.Player.Controller
 
         public void Tick()
         {
-            var moveDirection = _getNormalizedMoveDirectionCommand.Execute();
+            var moveDirection = _getMoveDirectionCommand.Execute();
 
             if (Mathf.Abs(moveDirection.magnitude) > 0.01f)
             {

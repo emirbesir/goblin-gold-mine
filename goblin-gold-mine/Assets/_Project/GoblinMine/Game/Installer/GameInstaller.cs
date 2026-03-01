@@ -59,7 +59,7 @@ namespace _Project.GoblinMine.Game.Installer
         {
             Container.Bind<CreatePlayerModelCommand>().AsSingle().NonLazy();
             Container.Bind<MovePlayerCommand>().AsSingle().NonLazy();
-            Container.Bind<GetNormalizedMoveDirectionCommand>().AsSingle().NonLazy();
+            Container.Bind<GetMoveDirectionCommand>().AsSingle().NonLazy();
             Container.Bind<CollectResourceCommand>().AsSingle().NonLazy();
             Container.Bind<CreateResourceModelCommand>().AsSingle().NonLazy();
         }
