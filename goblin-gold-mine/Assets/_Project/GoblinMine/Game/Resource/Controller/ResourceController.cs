@@ -1,4 +1,3 @@
-using System;
 using _Project.Shared.Initializable;
 using _Project.GoblinMine.Game.Player.View;
 using _Project.GoblinMine.Game.Resource.Command;
@@ -6,7 +5,6 @@ using _Project.GoblinMine.Game.Resource.Configuration;
 using _Project.GoblinMine.Game.Resource.Repository;
 using _Project.GoblinMine.Game.Resource.View;
 using UnityEngine;
-using Zenject;
 
 namespace _Project.GoblinMine.Game.Resource.Controller
 {
@@ -68,8 +66,8 @@ namespace _Project.GoblinMine.Game.Resource.Controller
             resource.CollectionTimer += Time.deltaTime;
             if (resource.CollectionTimer >= resource.CollectionIntervalSeconds)
             {
+                _collectResourceCommand.Execute(resource, resourceView);
                 resource.CollectionTimer -= resource.CollectionIntervalSeconds;
-                _collectResourceCommand.Execute(resource);
             }
         }
 

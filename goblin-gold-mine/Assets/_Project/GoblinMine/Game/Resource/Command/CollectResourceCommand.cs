@@ -3,6 +3,7 @@ using _Project.GoblinMine.Game.Resource.Repository;
 using _Project.GoblinMine.Game.Resource.Signal;
 using Zenject;
 using UnityEngine;
+using _Project.GoblinMine.Game.Resource.View;
 
 namespace _Project.GoblinMine.Game.Resource.Command
 {
@@ -19,22 +20,22 @@ namespace _Project.GoblinMine.Game.Resource.Command
             _signalBus = signalBus;
         }
 
-        public void Execute(ResourceModel resource)
+        public void Execute(ResourceModel resource, ResourceView resourceView)
         {
+            resourceView.PlayCollectionEffects();
+            
             if (!_resourceRepository.TotalCollected.ContainsKey(resource.ResourceType))
             {
                 _resourceRepository.TotalCollected[resource.ResourceType] = 0;
             }
 
-            _resourceRepository.TotalCollected[resource.ResourceType] += resource.Value;
+            _resourceRepository.TotalCollected[resource.ResourceType] += resource.CollectionAmount;
 
             _signalBus.Fire(new ResourceCollectedSignal
             {
                 ResourceType = resource.ResourceType,
-                Amount = resource.Value
+                CollectionAmount = resource.CollectionAmount
             });
-
-            Debug.Log($"Collected {resource.Value} of {resource.ResourceType}. Total collected: {_resourceRepository.TotalCollected[resource.ResourceType]}");
         }
     }
 }

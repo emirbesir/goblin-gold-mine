@@ -13,7 +13,9 @@ namespace _Project.GoblinMine.Game.Resource.Command
                 Id = Guid.NewGuid(),
                 ResourceType = resourceConfiguration.ResourceType,
                 DisplayName = resourceConfiguration.DisplayName,
-                Value = resourceConfiguration.Value,
+                Material = resourceConfiguration.Material,
+                GoldValue = resourceConfiguration.GoldValue,
+                CollectionAmount = resourceConfiguration.CollectionAmount,
                 CollectionIntervalSeconds = resourceConfiguration.CollectionIntervalSeconds,
                 CollectionTimer = 0f
             };

@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 using Zenject;
 
@@ -7,6 +8,11 @@ namespace _Project.GoblinMine.Game.Resource.View
     public class ResourceView : MonoBehaviour
     {
         [SerializeField] private MeshRenderer meshRenderer;
+        public Guid Id { get; set; }
+
+        public Action<Collider> OnTriggerEnterAction;
+        public Action<Collider> OnTriggerStayAction;
+        public Action<Collider> OnTriggerExitAction;
 
         public void SetMaterial(Material material)
         {
@@ -18,11 +24,18 @@ namespace _Project.GoblinMine.Game.Resource.View
             transform.position = position;
         }
 
-        public Guid Id { get; set; }
+        public void PlayCollectionEffects()
+        {
+            transform.DOPunchScale(
+                punch: new Vector3(0.2f, 0.2f, 0.2f),
+                duration: 0.3f,
+                vibrato: 10,
+                elasticity: 1f
+            );
 
-        public Action<Collider> OnTriggerEnterAction;
-        public Action<Collider> OnTriggerStayAction;
-        public Action<Collider> OnTriggerExitAction;
+            meshRenderer.material.DOColor(Color.white, 0.1f).SetLoops(2, LoopType.Yoyo);
+        }
+
 
         private void OnTriggerEnter(Collider other)
         {

@@ -7,9 +7,10 @@ namespace _Project.GoblinMine.Game.Resource.Model
     {
         public Guid Id { get; set; }
         public ResourceType ResourceType { get; set; }
-        public Material Material { get; set; }
         public string DisplayName { get; set; }
-        public int Value { get; set; }
+        public Material Material { get; set; }
+        public int GoldValue { get; set; }
+        public int CollectionAmount { get; set; }
         public float CollectionIntervalSeconds { get; set; }
 
         // State
