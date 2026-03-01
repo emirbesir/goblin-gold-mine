@@ -37,7 +37,7 @@ namespace _Project.GoblinMine.Game.Player.Controller
 
             if (Mathf.Abs(moveDirection.magnitude) > 0.01f)
             {
-                _movePlayerCommand.Execute(moveDirection.normalized);
+                _movePlayerCommand.Execute(moveDirection);
             }
         }
     }
