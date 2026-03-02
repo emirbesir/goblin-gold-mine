@@ -15,7 +15,8 @@ MonoBehaviour:
   resourceType: 2
   displayName: Gold
   material: {fileID: 2100000, guid: 638dd7b777a6e1f4eadf1ab85a9e7e02, type: 2}
-  goldValue: 50
+  sprite: {fileID: 21300000, guid: 76448105a8a7ac941a934992cb360797, type: 3}
+  economicValue: 20
   collectionAmount: 1
   collectionIntervalSeconds: 3
-  chunkCount: 2
+  chunkCount: 3

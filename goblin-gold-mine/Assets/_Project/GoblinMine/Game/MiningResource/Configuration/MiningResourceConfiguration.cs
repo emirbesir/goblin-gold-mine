@@ -13,6 +13,7 @@ namespace _Project.GoblinMine.Game.MiningResource.Configuration
         [Header("Visual")]
         [SerializeField] private string displayName;
         [SerializeField] private Material material;
+        [SerializeField] private Sprite sprite;
         [Header("Economy")]
         [SerializeField] private int economicValue;
         [Header("Collection")]
@@ -23,6 +24,7 @@ namespace _Project.GoblinMine.Game.MiningResource.Configuration
         public ResourceType ResourceType => resourceType;
         public string DisplayName => displayName;
         public Material Material => material;
+        public Sprite Sprite => sprite;
         public int EconomicValue => economicValue;
         public int CollectionAmount => collectionAmount;
         public float CollectionIntervalSeconds => collectionIntervalSeconds;

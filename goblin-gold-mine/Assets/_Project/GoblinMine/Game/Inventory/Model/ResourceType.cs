@@ -5,6 +5,7 @@ namespace _Project.GoblinMine.Game.Inventory.Model
         Bronze,
         Silver,
         Gold,
-        Diamond
+        Diamond,
+        Obsidian
     }
 }

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Project.GoblinMine.Game.MiningResource.Configuration.ResourceChunkVisualConfiguration
   jumpPower: 2
   jumpDurationSeconds: 0.6
-  scatterRadiusUnits: 1
+  scatterRadiusUnits: 2
   despawnDelaySeconds: 1
