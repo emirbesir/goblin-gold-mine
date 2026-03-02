@@ -1,4 +1,4 @@
-# Unity Projects — Code Review Checklist
+# Goblin's Gold Mine — Code Review Checklist
 
 Use this checklist when reviewing branches before merging into `develop`. Each item should be verified for every changed `.cs` file. Mark items as PASS / FAIL / N/A.
 
@@ -79,8 +79,8 @@ Use this checklist when reviewing branches before merging into `develop`. Each i
 - [ ] **Exception:** `[SerializeField]` fields in Views and Configurations use `camelCase` without underscore
 - [ ] Properties: PascalCase with expression-bodied getters where appropriate
 - [ ] Constants/hashes: `private static readonly` with meaningful names
-- [ ] Namespaces match folder structure: `ArvisGames.ProjectConveyorHeroes.Game.Feature.Layer`
-- [ ] No abbreviations unless universally understood (HP, AoE, DoT, DPS are fine)
+- [ ] Namespaces match folder structure: `_Project.GoblinMine.Game.Feature.Layer`
+- [ ] No abbreviations are allowed.
 - [ ] **Duration/cooldown fields explicitly state units:** `attackCooldownSeconds`, `stunDurationMilliseconds`
 - [ ] **Distance fields explicitly state units:** `attackRangeUnits`, `aoeRadiusUnits` (game world space)
 - [ ] **Speed/velocity fields explicitly state units:** `projectileSpeedUnitsPerSecond`, `movementSpeedUnitsPerTurn`

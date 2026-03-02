@@ -377,6 +377,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &351314435
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 351314436}
+  m_Layer: 0
+  m_Name: ResourceChunkViewContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &351314436
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351314435}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &515769309
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,9 +699,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Project.GoblinMine.Game.Installer.GameInstaller
   playerConfiguration: {fileID: 11400000, guid: d96b59500b44d5c4285720682477e9f4, type: 2}
   resourceConfigurationCollection: {fileID: 11400000, guid: 2fddd0942bbd99844b955dbf9cd340c3, type: 2}
+  miningResourceVisualConfiguration: {fileID: 11400000, guid: df3f58cb55ab5ea4b9957a99304aff24, type: 2}
+  resourceChunkVisualConfiguration: {fileID: 11400000, guid: 6f79c1aa524604b448c584bf1fc8853b, type: 2}
   playerView: {fileID: 615040399}
-  resourceView: {fileID: 5761958609046881480, guid: 073d22fe68428c24c97c1574dc45e9db, type: 3}
-  resourceViewContainer: {fileID: 2104805549}
+  miningResourceView: {fileID: 5761958609046881480, guid: 073d22fe68428c24c97c1574dc45e9db, type: 3}
+  resourceChunkView: {fileID: 348761447185004269, guid: 2a72caaa6a097e04da76d37be3132af1, type: 3}
+  miningResourceViewContainer: {fileID: 2104805549}
+  resourceChunkViewContainer: {fileID: 351314436}
   dynamicJoystick: {fileID: 110962824}
 --- !u!1 &1200469235
 GameObject:
@@ -1230,7 +1265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2104805549}
   m_Layer: 0
-  m_Name: ResourceViewContainer
+  m_Name: MiningResourceViewContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1323,4 +1358,5 @@ SceneRoots:
   - {fileID: 1952959527}
   - {fileID: 627807526}
   - {fileID: 2104805549}
+  - {fileID: 351314436}
   - {fileID: 3733138584109215684}

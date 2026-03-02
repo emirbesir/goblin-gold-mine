@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5b5eef56c69afd4a8e024f55ba856a7, type: 3}
+  m_Name: ResourceConfigurationBronze
+  m_EditorClassIdentifier: Assembly-CSharp::GoblinMine.Game.Resource.Configuration.ResourceConfiguration
+  resourceType: 0
+  displayName: Bronze
+  material: {fileID: 2100000, guid: e2aaa2099c8673b4ebe80c694a22f835, type: 2}
+  goldValue: 10
+  collectionAmount: 1
+  collectionIntervalSeconds: 1
+  chunkCount: 5

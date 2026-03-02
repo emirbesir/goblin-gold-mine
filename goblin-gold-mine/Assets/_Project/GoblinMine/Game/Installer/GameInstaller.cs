@@ -1,14 +1,17 @@
 using _Project.GoblinMine.Game.Bootstrap.Controller;
+using _Project.GoblinMine.Game.Inventory.Command;
+using _Project.GoblinMine.Game.Inventory.Controller;
+using _Project.GoblinMine.Game.Inventory.Repository;
 using _Project.GoblinMine.Game.Player.Command;
 using _Project.GoblinMine.Game.Player.Configuration;
 using _Project.GoblinMine.Game.Player.Controller;
 using _Project.GoblinMine.Game.Player.Repository;
 using _Project.GoblinMine.Game.Player.View;
-using _Project.GoblinMine.Game.Resource.Command;
-using _Project.GoblinMine.Game.Resource.Configuration;
-using _Project.GoblinMine.Game.Resource.Controller;
-using _Project.GoblinMine.Game.Resource.Repository;
-using _Project.GoblinMine.Game.Resource.View;
+using _Project.GoblinMine.Game.MiningResource.Command;
+using _Project.GoblinMine.Game.MiningResource.Configuration;
+using _Project.GoblinMine.Game.MiningResource.Controller;
+using _Project.GoblinMine.Game.MiningResource.Repository;
+using _Project.GoblinMine.Game.MiningResource.View;
 using UnityEngine;
 using Zenject;
 
@@ -18,14 +21,18 @@ namespace _Project.GoblinMine.Game.Installer
     {
         [Header("Configurations")]
         [SerializeField] private PlayerConfiguration playerConfiguration;
-        [SerializeField] private ResourceConfigurationCollection resourceConfigurationCollection;
+        [SerializeField] private MiningResourceConfigurationCollection resourceConfigurationCollection;
+        [SerializeField] private MiningResourceVisualConfiguration miningResourceVisualConfiguration;
+        [SerializeField] private ResourceChunkVisualConfiguration resourceChunkVisualConfiguration;
 
         [Header("Views")]
         [SerializeField] private PlayerView playerView;
-        [SerializeField] private ResourceView resourceView;
+        [SerializeField] private MiningResourceView miningResourceView;
+        [SerializeField] private ResourceChunkView resourceChunkView;
 
         [Header("Scene References")]
-        [SerializeField] private Transform resourceViewContainer;
+        [SerializeField] private Transform miningResourceViewContainer;
+        [SerializeField] private Transform resourceChunkViewContainer;
 
         [Header("External References")]
         [SerializeField] private DynamicJoystick dynamicJoystick;
@@ -45,14 +52,17 @@ namespace _Project.GoblinMine.Game.Installer
         private void BindConfigurations()
         {
             Container.Bind<PlayerConfiguration>().FromInstance(playerConfiguration).AsSingle().NonLazy();
-            Container.Bind<ResourceConfigurationCollection>().FromInstance(resourceConfigurationCollection).AsSingle().NonLazy();
+            Container.Bind<MiningResourceConfigurationCollection>().FromInstance(resourceConfigurationCollection).AsSingle().NonLazy();
+            Container.Bind<MiningResourceVisualConfiguration>().FromInstance(miningResourceVisualConfiguration).AsSingle().NonLazy();
+            Container.Bind<ResourceChunkVisualConfiguration>().FromInstance(resourceChunkVisualConfiguration).AsSingle().NonLazy();
         }
 
         private void BindRepositories()
         {
             Container.Bind<PlayerRepository>().AsSingle().NonLazy();
-            Container.Bind<ResourceRepository>().AsSingle().NonLazy();
-            Container.Bind<ResourceViewRepository>().AsSingle().NonLazy();
+            Container.Bind<MiningResourceRepository>().AsSingle().NonLazy();
+            Container.Bind<MiningResourceViewRepository>().AsSingle().NonLazy();
+            Container.Bind<InventoryRepository>().AsSingle().NonLazy();
         }
 
         private void BindCommands()
@@ -60,8 +70,11 @@ namespace _Project.GoblinMine.Game.Installer
             Container.Bind<CreatePlayerModelCommand>().AsSingle().NonLazy();
             Container.Bind<MovePlayerCommand>().AsSingle().NonLazy();
             Container.Bind<GetMoveDirectionCommand>().AsSingle().NonLazy();
-            Container.Bind<CollectResourceCommand>().AsSingle().NonLazy();
             Container.Bind<CreateResourceModelCommand>().AsSingle().NonLazy();
+            Container.Bind<CreateMiningResourceModelCommand>().AsSingle().NonLazy();
+            Container.Bind<SpawnResourceChunksCommand>().AsSingle().NonLazy();
+            Container.Bind<InitializeMiningResourcesCommand>().AsSingle().NonLazy();
+            Container.Bind<CollectMiningResourceCommand>().AsSingle().NonLazy();
         }
 
         private void BindViews()
@@ -73,7 +86,8 @@ namespace _Project.GoblinMine.Game.Installer
         {
             Container.BindInterfacesAndSelfTo<GameBootstrapController>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<PlayerController>().AsSingle().NonLazy();
-            Container.BindInterfacesAndSelfTo<ResourceController>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<InventoryController>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<MiningResourceController>().AsSingle().NonLazy();
         }
 
         private void BindExternalReferences()
@@ -83,18 +97,17 @@ namespace _Project.GoblinMine.Game.Installer
         
         private void BindFactories()
         {
-            Container.BindFactory<ResourceView, ResourceView.Factory>()
-                .FromComponentInNewPrefab(resourceView)
-                .UnderTransform(resourceViewContainer);
+            Container.BindFactory<MiningResourceView, MiningResourceView.Factory>()
+                .FromComponentInNewPrefab(miningResourceView)
+                .UnderTransform(miningResourceViewContainer);
         }
 
         private void BindMemoryPools()
         {
-            // Container.BindMemoryPool<ResourceView, ResourceView.Pool>()
-            //     .WithInitialSize(10)
-            //     .FromComponentInNewPrefab(resourceView)
-            //     .UnderTransform(resourceViewContainer);
-            //     .NonLazy();
+            Container.BindMemoryPool<ResourceChunkView, ResourceChunkView.Pool>()
+                .WithInitialSize(50)
+                .FromComponentInNewPrefab(resourceChunkView)
+                .UnderTransform(resourceChunkViewContainer);
         }
     }
 }
