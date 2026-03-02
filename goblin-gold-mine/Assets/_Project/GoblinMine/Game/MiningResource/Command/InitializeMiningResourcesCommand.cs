@@ -1,6 +1,5 @@
 using System;
 using _Project.GoblinMine.Game.MiningResource.Configuration;
-using _Project.GoblinMine.Game.MiningResource.Model;
 using _Project.GoblinMine.Game.MiningResource.Repository;
 using _Project.GoblinMine.Game.MiningResource.View;
 using _Project.GoblinMine.Game.Inventory.Command;
@@ -12,10 +11,8 @@ namespace _Project.GoblinMine.Game.MiningResource.Command
     public class InitializeMiningResourcesCommand
     {
         private readonly MiningResourceRepository _miningResourceRepository;
-        private readonly InventoryRepository _inventoryRepository;
         private readonly MiningResourceViewRepository _miningResourceViewRepository;
         private readonly CreateMiningResourceModelCommand _createMiningResourceModelCommand;
-        private readonly CreateResourceModelCommand _createResourceModelCommand;
         private readonly MiningResourceView.Factory _miningResourceViewFactory;
 
         public InitializeMiningResourcesCommand(
@@ -27,10 +24,8 @@ namespace _Project.GoblinMine.Game.MiningResource.Command
             MiningResourceView.Factory miningResourceViewFactory)
         {
             _miningResourceRepository = miningResourceRepository;
-            _inventoryRepository = inventoryRepository;
             _miningResourceViewRepository = miningResourceViewRepository;
             _createMiningResourceModelCommand = createMiningResourceModelCommand;
-            _createResourceModelCommand = createResourceModelCommand;
             _miningResourceViewFactory = miningResourceViewFactory;
         }
 
@@ -43,9 +38,6 @@ namespace _Project.GoblinMine.Game.MiningResource.Command
             {
                 var miningResource = _createMiningResourceModelCommand.Execute(config);
                 _miningResourceRepository.MiningResources.Add(miningResource);
-
-                var resource = _createResourceModelCommand.Execute(config.ResourceType);
-                _inventoryRepository.Resources.Add(resource);
 
                 var resourceView = _miningResourceViewFactory.Create();
                 resourceView.SetMaterial(config.Material);

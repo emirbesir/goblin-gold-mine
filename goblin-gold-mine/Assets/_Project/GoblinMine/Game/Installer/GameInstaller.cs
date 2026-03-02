@@ -14,6 +14,7 @@ using _Project.GoblinMine.Game.MiningResource.Repository;
 using _Project.GoblinMine.Game.MiningResource.View;
 using UnityEngine;
 using Zenject;
+using _Project.GoblinMine.Game.Inventory.View;
 
 namespace _Project.GoblinMine.Game.Installer
 {
@@ -29,10 +30,12 @@ namespace _Project.GoblinMine.Game.Installer
         [SerializeField] private PlayerView playerView;
         [SerializeField] private MiningResourceView miningResourceView;
         [SerializeField] private ResourceChunkView resourceChunkView;
+        [SerializeField] private ResourceView resourceView;
 
         [Header("Scene References")]
         [SerializeField] private Transform miningResourceViewContainer;
         [SerializeField] private Transform resourceChunkViewContainer;
+        [SerializeField] private Transform resourceViewContainer;
 
         [Header("External References")]
         [SerializeField] private DynamicJoystick dynamicJoystick;
@@ -63,6 +66,7 @@ namespace _Project.GoblinMine.Game.Installer
             Container.Bind<MiningResourceRepository>().AsSingle().NonLazy();
             Container.Bind<MiningResourceViewRepository>().AsSingle().NonLazy();
             Container.Bind<InventoryRepository>().AsSingle().NonLazy();
+            Container.Bind<InventoryViewRepository>().AsSingle().NonLazy();
         }
 
         private void BindCommands()
@@ -100,6 +104,9 @@ namespace _Project.GoblinMine.Game.Installer
             Container.BindFactory<MiningResourceView, MiningResourceView.Factory>()
                 .FromComponentInNewPrefab(miningResourceView)
                 .UnderTransform(miningResourceViewContainer);
+            Container.BindFactory<ResourceView, ResourceView.Factory>()
+                .FromComponentInNewPrefab(resourceView)
+                .UnderTransform(resourceViewContainer);
         }
 
         private void BindMemoryPools()
