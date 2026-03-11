@@ -6,6 +6,7 @@ using _Project.GoblinMine.Game.Worker.Model;
 using _Project.GoblinMine.Game.Worker.Repository;
 using _Project.GoblinMine.Game.Worker.Signal;
 using _Project.GoblinMine.Game.Worker.View;
+using _Project.Shared.Initializable;
 using UnityEngine;
 using Zenject;
 
