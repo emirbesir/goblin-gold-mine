@@ -40,7 +40,7 @@ Use this checklist when reviewing branches before merging into `develop`. Each i
 ### Signals (Zenject SignalBus)
 - [ ] Signals are used for **decoupled communication between systems** (Controller-to-Controller, system-to-system)
 - [ ] Signals are simple data carriers (no logic)
-- [ ] Signal names clearly describe the event (`EnemyDiedSignal`, not `ProcessSignal`)
+- [ ] Signal names clearly describe the event (`ResourceCollectedSignal`, not `ProcessSignal`)
 - [ ] Views do **not** fire Zenject Signals — they use Action events instead
 
 ---

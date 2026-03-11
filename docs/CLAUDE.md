@@ -1,17 +1,17 @@
 # Goblin's Gold Mine - Claude Guidelines
 
 ## Project Overview
-Unity 6 (6000.3.6f1) mobile game - arcade idle game.
+Unity 6 (6000.3.6f1) mobile game - goblin mining idle game.
 
 ## Code Style
 
 ### Naming Conventions
-- **Classes**: PascalCase with suffix indicating type: `AttackCommand`, `EnemyView`, `ScoreRepository`, `GameController`. **All MonoBehaviours must end with `View`**. All Zenject signals must end with `Signal` and clearly describe the event (`EnemyDiedSignal`, not `ProcessSignal`)
+- **Classes**: PascalCase with suffix indicating type: `AttackCommand`, `EnemyView`, `ScoreRepository`, `GameController`. **All MonoBehaviours must end with `View`**. All Zenject signals must end with `Signal` and clearly describe the event (`ResourceCollectedSignal`, not `ProcessSignal`)
 - **Private fields**: `_camelCase` with underscore prefix
 - **Exception**: `[SerializeField]` fields in Views and Configurations use `camelCase` without underscore
 - **Properties**: PascalCase, prefer expression-bodied getters: `public float Value => _value;`
 - **Constants/Animator hashes**: `private static readonly int WalkingId = Animator.StringToHash("Walking");`
-- **Namespaces**: Match folder structure: `_Project.GoblinMine.Game.MiningResource.Command`
+- **Namespaces**: Match folder structure: `_Project.GoblinMine.Game.Hero.Command`
 - **Duration/cooldown fields**: Explicitly state units — `attackCooldownSeconds`, `stunDurationMilliseconds`
 - **Distance fields**: Explicitly state units — `attackRangeUnits`, `aoeRadiusUnits` (game world space)
 - **Speed/velocity fields**: Explicitly state units — `projectileSpeedUnitsPerSecond`, `movementSpeedUnitsPerTurn`
@@ -50,7 +50,7 @@ Unity 6 (6000.3.6f1) mobile game - arcade idle game.
    └─────────┘
 ```
 
-- **Controllers**: Orchestrate logic, subscribe to signals, coordinate commands and views. Can contain simple conditional logic (e.g. FTUE checks). As logic gets complex, extract into Commands.
+- **Controllers**: Orchestrate logic, subscribe to signals, coordinate commands and views. Can contain simple conditional logic (e.g. FTUE checks). As logic gets complex, extract into Commands. **Controllers never store state** — all state (including transient/pending data) belongs in Repositories.
 - **Commands**: Execute specific atomic actions, access repositories, handle object instantiation. Commands can also work with Views — calling view methods to trigger animations, VFX, or other visual feedback, awaiting async view methods (`UniTask`), chaining visual sequences, and performing model/state changes alongside. Commands should avoid orchestrating/calling other commands — orchestration belongs in Controllers. Commands can be async (`UniTask` with `CancellationToken`) or synchronous (returning `void`, `int`, `List<T>`, etc.).
 - **Repositories**: Hold state (models), accessed by controllers and commands. Repositories know **only about their Models** — no references to Views, Controllers, Commands, Signals, or other Repositories. No signal firing from Repositories. No conditional logic beyond basic lookup.
 - **Views**: MonoBehaviours for rendering, communicate with Controllers via **Action events** (e.g. `OnButtonClicked`, `OnDragStarted`) — **not** Zenject Signals. **Views should NEVER instantiate objects** - instantiation belongs in Commands or Controllers. Views contain no business logic. Switch statements in Views for visual mapping (e.g. choosing a sprite based on an enum) are acceptable.
@@ -156,7 +156,7 @@ Container.Bind<SomeConfiguration>().FromScriptableObject(config).AsSingle().NonL
 - **No code duplication** - No copy-pasted logic across files. Extract to shared Command or utility.
 
 ### Error Handling & Safety
-- **Null checks on Views** - Always null-check before accessing View references (Views can be despawned/pooled).
+- **No defensive null checks in Views** - View serialized fields are expected to be assigned in the Inspector. If something is missing, let it throw so the error is caught immediately. Do not write null-guard code in Views.
 - **Null checks on repository lookups** - Repository lookups that might return null must be checked.
 - **CancellationToken propagation** - Properly propagate `CancellationToken` through async call chains. Check at meaningful points inside loops, not just at the end.
 - **No swallowed exceptions** - No empty catch blocks. If a catch is intentionally empty, add a comment explaining why.
@@ -171,7 +171,7 @@ Container.Bind<SomeConfiguration>().FromScriptableObject(config).AsSingle().NonL
 - **No leftover debug code** - No `Debug.Log` statements that aren't meant to stay in production.
 
 ## Common Gotchas
-- Views have dual repositories: `EnemyRepository` (models) + `EnemyViewRepository` (view references)
+- Views have dual repositories: e.g. `MiningResourceRepository` (models) + `MiningResourceViewRepository` (view references)
 - Always cache Animator parameter hashes as static readonly
 - Use Memory Pools for spawning, not direct Instantiate
 - No luck-based retry loops (e.g. while loops with random attempts) — use deterministic selection
