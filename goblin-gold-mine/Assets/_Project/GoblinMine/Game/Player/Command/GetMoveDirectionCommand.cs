@@ -4,16 +4,16 @@ namespace _Project.GoblinMine.Game.Player.Command
 {
     public class GetMoveDirectionCommand
     {
-        private readonly DynamicJoystick _dynamicJoystick;
+        private readonly Joystick _joystick;
 
-        public GetMoveDirectionCommand(DynamicJoystick dynamicJoystick)
+        public GetMoveDirectionCommand(Joystick joystick)
         {
-            _dynamicJoystick = dynamicJoystick;
+            _joystick = joystick;
         }
 
         public Vector3 Execute()
         {
-            return new Vector3(_dynamicJoystick.Horizontal, 0f, _dynamicJoystick.Vertical);
+            return new Vector3(_joystick.Horizontal, 0f, _joystick.Vertical);
         }
     }
 }

@@ -38,7 +38,7 @@ namespace _Project.GoblinMine.Game.Installer
         [SerializeField] private Transform resourceViewContainer;
 
         [Header("External References")]
-        [SerializeField] private DynamicJoystick dynamicJoystick;
+        [SerializeField] private Joystick joystick;
 
         public override void InstallBindings()
         {
@@ -96,7 +96,7 @@ namespace _Project.GoblinMine.Game.Installer
 
         private void BindExternalReferences()
         {
-            Container.Bind<DynamicJoystick>().FromInstance(dynamicJoystick).AsSingle().NonLazy();
+            Container.Bind<Joystick>().FromInstance(joystick).AsSingle().NonLazy();
         }
         
         private void BindFactories()
