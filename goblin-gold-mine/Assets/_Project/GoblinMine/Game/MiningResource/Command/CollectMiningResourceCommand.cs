@@ -13,6 +13,7 @@ namespace _Project.GoblinMine.Game.MiningResource.Command
     {
         private readonly SpawnResourceChunksCommand _spawnResourceChunksCommand;
         private readonly MiningResourceVisualConfiguration _miningResourceVisualConfiguration;
+        private readonly ResourceChunkVisualConfiguration _chunkVisualConfiguration;
         private readonly SignalBus _signalBus;
 
         public CollectMiningResourceCommand(
@@ -33,7 +34,8 @@ namespace _Project.GoblinMine.Game.MiningResource.Command
         {
             resourceView.PlayCollectionEffects(_miningResourceVisualConfiguration);
             await _spawnResourceChunksCommand.Execute(resource, configuration.Material, resourceView.transform.position, cancellationToken);
-
+            
+            await UniTask.Delay((int) _chunkVisualConfiguration.DespawnDelaySeconds * 1000, cancellationToken: cancellationToken);
             _signalBus.Fire(new ResourceCollectedSignal
             {
                 ResourceType = resource.ResourceType,

@@ -12,7 +12,7 @@ namespace _Project.GoblinMine.Game.MiningResource.Model
         public float CollectionIntervalSeconds { get; set; }
         public int ChunkCount { get; set; }
 
-        // State
+        // Runtime
         public float CollectionTimer { get; set; }
     }
 }

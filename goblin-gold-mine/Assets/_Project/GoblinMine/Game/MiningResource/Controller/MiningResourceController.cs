@@ -15,27 +15,21 @@ namespace _Project.GoblinMine.Game.MiningResource.Controller
     {
         private readonly MiningResourceConfigurationCollection _miningResourceConfigurationCollection;
         private readonly MiningResourceRepository _miningResourceRepository;
-        private readonly MiningResourceViewRepository _miningResourceViewRepository;
         private readonly InitializeMiningResourcesCommand _initializeMiningResourcesCommand;
         private readonly CollectMiningResourceCommand _collectMiningResourceCommand;
-        private readonly MiningResourceVisualConfiguration _miningResourceVisualConfiguration;
 
         private CancellationTokenSource _cancellationTokenSource;
 
         public MiningResourceController(
             MiningResourceConfigurationCollection miningResourceConfigurationCollection,
             MiningResourceRepository miningResourceRepository,
-            MiningResourceViewRepository miningResourceViewRepository,
             InitializeMiningResourcesCommand initializeMiningResourcesCommand,
-            CollectMiningResourceCommand collectMiningResourceCommand,
-            MiningResourceVisualConfiguration miningResourceVisualConfiguration)
+            CollectMiningResourceCommand collectMiningResourceCommand)
         {
             _miningResourceConfigurationCollection = miningResourceConfigurationCollection;
             _miningResourceRepository = miningResourceRepository;
-            _miningResourceViewRepository = miningResourceViewRepository;
             _initializeMiningResourcesCommand = initializeMiningResourcesCommand;
             _collectMiningResourceCommand = collectMiningResourceCommand;
-            _miningResourceVisualConfiguration = miningResourceVisualConfiguration;
         }
 
         public void PreInitialize()
