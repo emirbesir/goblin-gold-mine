@@ -13,5 +13,10 @@ namespace _Project.GoblinMine.Game.MiningResource.Repository
         {
             return MiningResources.FirstOrDefault(r => r.Id == id);
         }
+
+        public MiningResourceModel GetMiningResourceByType(Inventory.Model.ResourceType resourceType)
+        {
+            return MiningResources.FirstOrDefault(r => r.ResourceType == resourceType);
+        }
     }
 }

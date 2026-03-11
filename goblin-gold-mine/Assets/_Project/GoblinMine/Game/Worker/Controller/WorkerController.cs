@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using _Project.GoblinMine.Game.Player.View;
 using _Project.GoblinMine.Game.Worker.Command;
 using _Project.GoblinMine.Game.Worker.Configuration;
@@ -22,6 +23,8 @@ namespace _Project.GoblinMine.Game.Worker.Controller
         private readonly WorkerMineCommand _workerMineCommand;
         private readonly SignalBus _signalBus;
 
+        private CancellationTokenSource _cancellationTokenSource;
+
         public WorkerController(
             WorkerConfiguration workerConfiguration,
             WorkerVisualConfiguration workerVisualConfiguration,
@@ -42,6 +45,8 @@ namespace _Project.GoblinMine.Game.Worker.Controller
 
         public void PreInitialize()
         {
+            _cancellationTokenSource = new CancellationTokenSource();
+
             _initializeWorkersCommand.Execute(
                 _workerConfiguration,
                 _workerVisualConfiguration,
@@ -63,7 +68,7 @@ namespace _Project.GoblinMine.Game.Worker.Controller
                     worker.MiningTimer -= worker.MiningIntervalSeconds;
 
                     var workerView = _workerViewRepository.GetWorkerViewById(worker.Id);
-                    _workerMineCommand.Execute(worker, workerView);
+                    _workerMineCommand.Execute(worker, workerView, _cancellationTokenSource.Token);
                 }
 
                 worker.AwakeTimer += Time.deltaTime;
@@ -77,6 +82,8 @@ namespace _Project.GoblinMine.Game.Worker.Controller
 
         public void Dispose()
         {
+            _cancellationTokenSource?.Cancel();
+            _cancellationTokenSource?.Dispose();
         }
 
         private void PutWorkerToSleep(WorkerModel worker)
