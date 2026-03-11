@@ -47,7 +47,7 @@ namespace _Project.GoblinMine.Game.Inventory.Controller
                 var resourceView = _resourceViewFactory.Create();
                 resourceView.Id = resource.Id;
                 resourceView.SetSprite(config.Sprite);
-                resourceView.SetText($"{config.DisplayName}: {resource.Amount}");
+                resourceView.SetText(resource.Amount.ToString());
                 _inventoryViewRepository.ResourceViews.Add(resourceView);
             }
         }
@@ -69,7 +69,7 @@ namespace _Project.GoblinMine.Game.Inventory.Controller
             
             var config = _miningResourceConfigurationCollection.GetConfigurationByType(resource.ResourceType);
             var resourceView = _inventoryViewRepository.GetResourceViewById(resource.Id);
-            resourceView.SetText($"{config.DisplayName}: {resource.Amount}");
+            resourceView.SetText(resource.Amount.ToString());
         }
     }
 }

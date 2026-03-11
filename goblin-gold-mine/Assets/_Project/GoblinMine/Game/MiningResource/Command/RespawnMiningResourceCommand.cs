@@ -20,7 +20,7 @@ namespace _Project.GoblinMine.Game.MiningResource.Command
 
             resource.RemainingDurability = configuration.Durability;
             resource.CollectionTimer = 0f;
-            resourceView.SetActive(true);
+            resourceView.SetDepleted(false);
         }
     }
 }

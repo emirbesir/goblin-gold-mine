@@ -61,6 +61,8 @@ namespace _Project.GoblinMine.Game.MiningResource.Controller
 
             var resource = _miningResourceRepository.GetMiningResourceById(resourceView.Id);
 
+            if (resource.RemainingDurability <= 0) return;
+
             resource.CollectionTimer += Time.deltaTime;
 
             if (resource.CollectionTimer >= resource.CollectionIntervalSeconds)
@@ -76,7 +78,7 @@ namespace _Project.GoblinMine.Game.MiningResource.Controller
                 if (resource.RemainingDurability <= 0)
                 {
                     resource.CollectionTimer = 0f;
-                    resourceView.SetActive(false);
+                    resourceView.SetDepleted(true);
                     _respawnMiningResourceCommand.Execute(
                         resource, resourceView, config, _cancellationTokenSource.Token).Forget();
                 }

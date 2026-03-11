@@ -9,6 +9,8 @@ namespace _Project.GoblinMine.Game.MiningResource.View
     {
         [SerializeField] private MeshRenderer meshRenderer;
         [SerializeField] private ResourceType resourceType;
+        [SerializeField] private GameObject readyModel;
+        [SerializeField] private GameObject depletedModel;
 
         public MeshRenderer MeshRenderer => meshRenderer;
         public ResourceType ResourceType => resourceType;
@@ -29,9 +31,10 @@ namespace _Project.GoblinMine.Game.MiningResource.View
             transform.position = position;
         }
 
-        public void SetActive(bool active)
+        public void SetDepleted(bool depleted)
         {
-            gameObject.SetActive(active);
+            readyModel.SetActive(!depleted);
+            depletedModel.SetActive(depleted);
         }
 
         public void PlayCollectionEffects(MiningResourceVisualConfiguration visualConfig)
