@@ -16,10 +16,14 @@ namespace _Project.GoblinMine.Game.MiningResource.Configuration
         [Header("Color Flash")]
         [SerializeField] private float colorFlashDurationSeconds = 0.1f;
 
+        [Header("Audio")]
+        [SerializeField] private AudioClip miningSound;
+
         public Vector3 PunchScale => punchScale;
         public float PunchDurationSeconds => punchDurationSeconds;
         public int PunchVibrato => punchVibrato;
         public float PunchElasticity => punchElasticity;
         public float ColorFlashDurationSeconds => colorFlashDurationSeconds;
+        public AudioClip MiningSound => miningSound;
     }
 }

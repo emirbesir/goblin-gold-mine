@@ -17,3 +17,4 @@ MonoBehaviour:
   punchVibrato: 10
   punchElasticity: 1
   colorFlashDurationSeconds: 0.1
+  miningSound: {fileID: 8300000, guid: 998f993bcbdfcc34f960518a2b0754b1, type: 3}

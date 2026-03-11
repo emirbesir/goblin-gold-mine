@@ -48,6 +48,11 @@ namespace _Project.GoblinMine.Game.MiningResource.View
 
             meshRenderer.material.DOColor(Color.white, visualConfig.ColorFlashDurationSeconds)
                 .SetLoops(2, LoopType.Yoyo);
+
+            if (visualConfig.MiningSound != null)
+            {
+                AudioSource.PlayClipAtPoint(visualConfig.MiningSound, transform.position);
+            }
         }
 
 
