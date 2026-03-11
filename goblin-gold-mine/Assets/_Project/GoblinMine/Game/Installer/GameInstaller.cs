@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using _Project.GoblinMine.Game.Bootstrap.Controller;
 using _Project.GoblinMine.Game.Inventory.Command;
 using _Project.GoblinMine.Game.Inventory.Controller;
@@ -28,12 +29,11 @@ namespace _Project.GoblinMine.Game.Installer
 
         [Header("Views")]
         [SerializeField] private PlayerView playerView;
-        [SerializeField] private MiningResourceView miningResourceView;
         [SerializeField] private ResourceChunkView resourceChunkView;
         [SerializeField] private ResourceView resourceView;
+        [SerializeField] private List<MiningResourceView> miningResourceViews;
 
         [Header("Scene References")]
-        [SerializeField] private Transform miningResourceViewContainer;
         [SerializeField] private Transform resourceChunkViewContainer;
         [SerializeField] private Transform resourceViewContainer;
 
@@ -49,7 +49,7 @@ namespace _Project.GoblinMine.Game.Installer
             BindViews();
             BindExternalReferences();
             BindFactories();
-            BindMemoryPools();               
+            BindMemoryPools();
         }
 
         private void BindConfigurations()
@@ -79,11 +79,13 @@ namespace _Project.GoblinMine.Game.Installer
             Container.Bind<SpawnResourceChunksCommand>().AsSingle().NonLazy();
             Container.Bind<InitializeMiningResourcesCommand>().AsSingle().NonLazy();
             Container.Bind<CollectMiningResourceCommand>().AsSingle().NonLazy();
+            Container.Bind<RespawnMiningResourceCommand>().AsSingle().NonLazy();
         }
 
         private void BindViews()
         {
             Container.Bind<PlayerView>().FromInstance(playerView).AsSingle().NonLazy();
+            Container.Bind<List<MiningResourceView>>().FromInstance(miningResourceViews).AsSingle().NonLazy();
         }
 
         private void BindControllers()
@@ -98,12 +100,9 @@ namespace _Project.GoblinMine.Game.Installer
         {
             Container.Bind<Joystick>().FromInstance(joystick).AsSingle().NonLazy();
         }
-        
+
         private void BindFactories()
         {
-            Container.BindFactory<MiningResourceView, MiningResourceView.Factory>()
-                .FromComponentInNewPrefab(miningResourceView)
-                .UnderTransform(miningResourceViewContainer);
             Container.BindFactory<ResourceView, ResourceView.Factory>()
                 .FromComponentInNewPrefab(resourceView)
                 .UnderTransform(resourceViewContainer);

@@ -1,9 +1,8 @@
 using System;
+using System.Collections.Generic;
 using _Project.GoblinMine.Game.MiningResource.Configuration;
 using _Project.GoblinMine.Game.MiningResource.Repository;
 using _Project.GoblinMine.Game.MiningResource.View;
-using _Project.GoblinMine.Game.Inventory.Command;
-using _Project.GoblinMine.Game.Inventory.Repository;
 using UnityEngine;
 
 namespace _Project.GoblinMine.Game.MiningResource.Command
@@ -13,20 +12,18 @@ namespace _Project.GoblinMine.Game.MiningResource.Command
         private readonly MiningResourceRepository _miningResourceRepository;
         private readonly MiningResourceViewRepository _miningResourceViewRepository;
         private readonly CreateMiningResourceModelCommand _createMiningResourceModelCommand;
-        private readonly MiningResourceView.Factory _miningResourceViewFactory;
+        private readonly List<MiningResourceView> _sceneViews;
 
         public InitializeMiningResourcesCommand(
             MiningResourceRepository miningResourceRepository,
-            InventoryRepository inventoryRepository,
             MiningResourceViewRepository miningResourceViewRepository,
             CreateMiningResourceModelCommand createMiningResourceModelCommand,
-            CreateResourceModelCommand createResourceModelCommand,
-            MiningResourceView.Factory miningResourceViewFactory)
+            List<MiningResourceView> sceneViews)
         {
             _miningResourceRepository = miningResourceRepository;
             _miningResourceViewRepository = miningResourceViewRepository;
             _createMiningResourceModelCommand = createMiningResourceModelCommand;
-            _miningResourceViewFactory = miningResourceViewFactory;
+            _sceneViews = sceneViews;
         }
 
         public void Execute(
@@ -34,25 +31,25 @@ namespace _Project.GoblinMine.Game.MiningResource.Command
             Action<MiningResourceView, Collider> onTriggerStay,
             Action<MiningResourceView, Collider> onTriggerExit)
         {
-            foreach (var config in configurationCollection.Configurations)
+            foreach (var view in _sceneViews)
             {
+                var config = configurationCollection.GetConfigurationByType(view.ResourceType);
+
+                if (config == null)
+                {
+                    Debug.LogWarning($"No configuration found for ResourceType {view.ResourceType} on {view.name}");
+                    continue;
+                }
+
                 var miningResource = _createMiningResourceModelCommand.Execute(config);
                 _miningResourceRepository.MiningResources.Add(miningResource);
 
-                var resourceView = _miningResourceViewFactory.Create();
-                resourceView.SetMaterial(config.Material);
-                resourceView.Id = miningResource.Id;
-                resourceView.OnTriggerStayAction += other => onTriggerStay(resourceView, other);
-                resourceView.OnTriggerExitAction += other => onTriggerExit(resourceView, other);
+                view.SetMaterial(config.Material);
+                view.Id = miningResource.Id;
+                view.OnTriggerStayAction += other => onTriggerStay(view, other);
+                view.OnTriggerExitAction += other => onTriggerExit(view, other);
 
-                // For demo purposes, randomly position resources in the scene.
-                // In the real game, we will have predefined spawn points.
-                resourceView.SetPosition(new Vector3(
-                    UnityEngine.Random.Range(-8f, 8f),
-                    0f,
-                    UnityEngine.Random.Range(-8f, 8f)));
-
-                _miningResourceViewRepository.MiningResourceViews.Add(resourceView);
+                _miningResourceViewRepository.MiningResourceViews.Add(view);
             }
         }
     }

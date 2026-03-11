@@ -17,7 +17,8 @@ namespace _Project.GoblinMine.Game.MiningResource.Command
                 CollectionAmount = resourceConfiguration.CollectionAmount,
                 CollectionIntervalSeconds = resourceConfiguration.CollectionIntervalSeconds,
                 ChunkCount = resourceConfiguration.ChunkCount,
-                CollectionTimer = 0f
+                CollectionTimer = 0f,
+                RemainingDurability = resourceConfiguration.Durability
             };
             
             return miningResource;

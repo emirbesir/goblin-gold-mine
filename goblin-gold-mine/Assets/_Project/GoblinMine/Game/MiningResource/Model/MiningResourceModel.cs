@@ -14,5 +14,6 @@ namespace _Project.GoblinMine.Game.MiningResource.Model
 
         // Runtime
         public float CollectionTimer { get; set; }
+        public int RemainingDurability { get; set; }
     }
 }

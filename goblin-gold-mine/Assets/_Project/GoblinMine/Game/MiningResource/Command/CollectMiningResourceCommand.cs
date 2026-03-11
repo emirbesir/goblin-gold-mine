@@ -19,10 +19,12 @@ namespace _Project.GoblinMine.Game.MiningResource.Command
         public CollectMiningResourceCommand(
             SpawnResourceChunksCommand spawnResourceChunksCommand,
             MiningResourceVisualConfiguration miningResourceVisualConfiguration,
+            ResourceChunkVisualConfiguration chunkVisualConfiguration,
             SignalBus signalBus)
         {
             _spawnResourceChunksCommand = spawnResourceChunksCommand;
             _miningResourceVisualConfiguration = miningResourceVisualConfiguration;
+            _chunkVisualConfiguration = chunkVisualConfiguration;
             _signalBus = signalBus;
         }
 

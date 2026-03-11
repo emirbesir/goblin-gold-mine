@@ -20,6 +20,9 @@ namespace _Project.GoblinMine.Game.MiningResource.Configuration
         [SerializeField] private int collectionAmount;
         [SerializeField] private float collectionIntervalSeconds;
         [SerializeField] private int chunkCount;
+        [Header("Durability")]
+        [SerializeField] private int durability = 5;
+        [SerializeField] private float respawnDelaySeconds = 10f;
 
         public ResourceType ResourceType => resourceType;
         public string DisplayName => displayName;
@@ -29,5 +32,7 @@ namespace _Project.GoblinMine.Game.MiningResource.Configuration
         public int CollectionAmount => collectionAmount;
         public float CollectionIntervalSeconds => collectionIntervalSeconds;
         public int ChunkCount => chunkCount;
+        public int Durability => durability;
+        public float RespawnDelaySeconds => respawnDelaySeconds;
     }
 }

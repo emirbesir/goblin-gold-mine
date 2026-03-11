@@ -20,3 +20,5 @@ MonoBehaviour:
   collectionAmount: 1
   collectionIntervalSeconds: 5
   chunkCount: 2
+  durability: 2
+  respawnDelaySeconds: 20

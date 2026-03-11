@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using Cysharp.Threading.Tasks;
 using Zenject;
 using UnityEngine;
 using _Project.Shared.Initializable;
@@ -15,21 +16,27 @@ namespace _Project.GoblinMine.Game.MiningResource.Controller
     {
         private readonly MiningResourceConfigurationCollection _miningResourceConfigurationCollection;
         private readonly MiningResourceRepository _miningResourceRepository;
+        private readonly MiningResourceViewRepository _miningResourceViewRepository;
         private readonly InitializeMiningResourcesCommand _initializeMiningResourcesCommand;
         private readonly CollectMiningResourceCommand _collectMiningResourceCommand;
+        private readonly RespawnMiningResourceCommand _respawnMiningResourceCommand;
 
         private CancellationTokenSource _cancellationTokenSource;
 
         public MiningResourceController(
             MiningResourceConfigurationCollection miningResourceConfigurationCollection,
             MiningResourceRepository miningResourceRepository,
+            MiningResourceViewRepository miningResourceViewRepository,
             InitializeMiningResourcesCommand initializeMiningResourcesCommand,
-            CollectMiningResourceCommand collectMiningResourceCommand)
+            CollectMiningResourceCommand collectMiningResourceCommand,
+            RespawnMiningResourceCommand respawnMiningResourceCommand)
         {
             _miningResourceConfigurationCollection = miningResourceConfigurationCollection;
             _miningResourceRepository = miningResourceRepository;
+            _miningResourceViewRepository = miningResourceViewRepository;
             _initializeMiningResourcesCommand = initializeMiningResourcesCommand;
             _collectMiningResourceCommand = collectMiningResourceCommand;
+            _respawnMiningResourceCommand = respawnMiningResourceCommand;
         }
 
         public void PreInitialize()
@@ -59,10 +66,20 @@ namespace _Project.GoblinMine.Game.MiningResource.Controller
             if (resource.CollectionTimer >= resource.CollectionIntervalSeconds)
             {
                 resource.CollectionTimer -= resource.CollectionIntervalSeconds;
-    
+
                 var config = _miningResourceConfigurationCollection.GetConfigurationByType(resource.ResourceType);
-                
+
                 _collectMiningResourceCommand.Execute(resource, resourceView, config, _cancellationTokenSource.Token).Forget();
+
+                resource.RemainingDurability--;
+
+                if (resource.RemainingDurability <= 0)
+                {
+                    resource.CollectionTimer = 0f;
+                    resourceView.SetActive(false);
+                    _respawnMiningResourceCommand.Execute(
+                        resource, resourceView, config, _cancellationTokenSource.Token).Forget();
+                }
             }
         }
 

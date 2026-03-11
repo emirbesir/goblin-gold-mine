@@ -1,16 +1,18 @@
 using System;
+using _Project.GoblinMine.Game.Inventory.Model;
 using _Project.GoblinMine.Game.MiningResource.Configuration;
 using DG.Tweening;
 using UnityEngine;
-using Zenject;
-
 namespace _Project.GoblinMine.Game.MiningResource.View
 {
     public class MiningResourceView : MonoBehaviour
     {
         [SerializeField] private MeshRenderer meshRenderer;
+        [SerializeField] private ResourceType resourceType;
+
         public MeshRenderer MeshRenderer => meshRenderer;
-        
+        public ResourceType ResourceType => resourceType;
+
         public Guid Id { get; set; }
 
         public Action<Collider> OnTriggerEnterAction;
@@ -25,6 +27,11 @@ namespace _Project.GoblinMine.Game.MiningResource.View
         public void SetPosition(Vector3 position)
         {
             transform.position = position;
+        }
+
+        public void SetActive(bool active)
+        {
+            gameObject.SetActive(active);
         }
 
         public void PlayCollectionEffects(MiningResourceVisualConfiguration visualConfig)
@@ -56,8 +63,5 @@ namespace _Project.GoblinMine.Game.MiningResource.View
             OnTriggerExitAction?.Invoke(other);
         }
 
-        public class Factory : PlaceholderFactory<MiningResourceView>
-        {
-        }
     }
 }
