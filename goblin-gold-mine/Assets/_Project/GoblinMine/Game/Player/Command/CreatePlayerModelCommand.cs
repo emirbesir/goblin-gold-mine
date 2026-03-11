@@ -18,6 +18,10 @@ namespace _Project.GoblinMine.Game.Player.Command
             {
                 DisplayName = _playerConfiguration.DisplayName,
                 MoveSpeedUnitsPerSecond = _playerConfiguration.MoveSpeedUnitsPerSecond,
+                BaseMoveSpeedUnitsPerSecond = _playerConfiguration.MoveSpeedUnitsPerSecond,
+                MiningIntervalSeconds = _playerConfiguration.MiningIntervalSeconds,
+                BaseMiningIntervalSeconds = _playerConfiguration.MiningIntervalSeconds,
+                MaxCarryCapacity = _playerConfiguration.MaxCarryCapacity,
             };
 
             return playerModel;

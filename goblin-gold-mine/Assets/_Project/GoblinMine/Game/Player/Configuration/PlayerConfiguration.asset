@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GoblinMine.Game.Player.Configuration.PlayerConfiguration
   displayName: Goblin King
   moveSpeedUnitsPerSecond: 5
+  miningIntervalSeconds: 0.8
+  maxCarryCapacity: 20

@@ -32,16 +32,18 @@ namespace _Project.GoblinMine.Game.MiningResource.Command
             MiningResourceModel resource,
             MiningResourceView resourceView,
             MiningResourceConfiguration configuration,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken,
+            bool autoDeposit = false)
         {
             resourceView.PlayCollectionEffects(_miningResourceVisualConfiguration);
             await _spawnResourceChunksCommand.Execute(resource, configuration.Material, resourceView.transform.position, cancellationToken);
-            
+
             await UniTask.Delay((int) _chunkVisualConfiguration.DespawnDelaySeconds * 1000, cancellationToken: cancellationToken);
             _signalBus.Fire(new ResourceCollectedSignal
             {
                 ResourceType = resource.ResourceType,
-                CollectionAmount = resource.CollectionAmount
+                CollectionAmount = resource.CollectionAmount,
+                AutoDeposit = autoDeposit
             });
         }
     }

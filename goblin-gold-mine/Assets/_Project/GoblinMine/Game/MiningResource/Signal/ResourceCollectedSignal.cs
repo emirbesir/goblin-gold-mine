@@ -7,5 +7,6 @@ namespace _Project.GoblinMine.Game.MiningResource.Signal
     {
         public ResourceType ResourceType { get; set; }
         public int CollectionAmount { get; set; }
+        public bool AutoDeposit { get; set; }
     }
 }

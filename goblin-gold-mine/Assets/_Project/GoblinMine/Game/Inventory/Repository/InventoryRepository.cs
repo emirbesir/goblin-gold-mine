@@ -18,5 +18,10 @@ namespace _Project.GoblinMine.Game.Inventory.Repository
         {
             return Resources.FirstOrDefault(r => r.ResourceType == type);
         }
+
+        public int GetTotalCarried()
+        {
+            return Resources.Sum(r => r.Amount);
+        }
     }
 }

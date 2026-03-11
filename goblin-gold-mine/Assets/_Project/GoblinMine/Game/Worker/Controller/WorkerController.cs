@@ -121,6 +121,16 @@ namespace _Project.GoblinMine.Game.Worker.Controller
             });
         }
 
+        public void HandleTriggerStayPublic(WorkerView workerView, Collider other)
+        {
+            HandleTriggerStay(workerView, other);
+        }
+
+        public void HandleTriggerExitPublic(WorkerView workerView, Collider other)
+        {
+            HandleTriggerExit(workerView, other);
+        }
+
         private void HandleTriggerStay(WorkerView workerView, Collider other)
         {
             if (!other.TryGetComponent<PlayerView>(out _))

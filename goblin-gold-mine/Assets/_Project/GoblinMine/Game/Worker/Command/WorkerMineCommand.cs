@@ -51,7 +51,7 @@ namespace _Project.GoblinMine.Game.Worker.Command
             var config = _miningResourceConfigurationCollection.GetConfigurationByType(resource.ResourceType);
 
             workerView.PlayCollectionPulse(_workerVisualConfiguration);
-            _collectMiningResourceCommand.Execute(resource, resourceView, config, cancellationToken).Forget();
+            _collectMiningResourceCommand.Execute(resource, resourceView, config, cancellationToken, autoDeposit: true).Forget();
 
             resource.RemainingDurability--;
 

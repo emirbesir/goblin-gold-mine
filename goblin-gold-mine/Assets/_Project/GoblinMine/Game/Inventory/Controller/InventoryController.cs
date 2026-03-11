@@ -5,6 +5,8 @@ using _Project.GoblinMine.Game.Inventory.Repository;
 using _Project.GoblinMine.Game.Inventory.View;
 using _Project.GoblinMine.Game.MiningResource.Configuration;
 using _Project.GoblinMine.Game.MiningResource.Signal;
+using _Project.GoblinMine.Game.Player.Repository;
+using _Project.GoblinMine.Game.Player.View;
 using _Project.Shared.Initializable;
 using Zenject;
 
@@ -17,6 +19,8 @@ namespace _Project.GoblinMine.Game.Inventory.Controller
         private readonly ResourceView.Factory _resourceViewFactory;
         private readonly MiningResourceConfigurationCollection _miningResourceConfigurationCollection;
         private readonly CreateResourceModelCommand _createResourceModelCommand;
+        private readonly PlayerRepository _playerRepository;
+        private readonly CarryCapacityView _carryCapacityView;
         private readonly SignalBus _signalBus;
 
         public InventoryController(
@@ -25,6 +29,8 @@ namespace _Project.GoblinMine.Game.Inventory.Controller
             ResourceView.Factory resourceViewFactory,
             MiningResourceConfigurationCollection miningResourceConfigurationCollection,
             CreateResourceModelCommand createResourceModelCommand,
+            PlayerRepository playerRepository,
+            CarryCapacityView carryCapacityView,
             SignalBus signalBus)
         {
             _inventoryRepository = inventoryRepository;
@@ -32,6 +38,8 @@ namespace _Project.GoblinMine.Game.Inventory.Controller
             _createResourceModelCommand = createResourceModelCommand;
             _miningResourceConfigurationCollection = miningResourceConfigurationCollection;
             _resourceViewFactory = resourceViewFactory;
+            _playerRepository = playerRepository;
+            _carryCapacityView = carryCapacityView;
             _signalBus = signalBus;
         }
 
@@ -43,7 +51,7 @@ namespace _Project.GoblinMine.Game.Inventory.Controller
                 _inventoryRepository.Resources.Add(resource);
 
                 var config = _miningResourceConfigurationCollection.GetConfigurationByType(resource.ResourceType);
-                
+
                 var resourceView = _resourceViewFactory.Create();
                 resourceView.Id = resource.Id;
                 resourceView.SetSprite(config.Sprite);
@@ -55,6 +63,7 @@ namespace _Project.GoblinMine.Game.Inventory.Controller
         public void PostInitialize()
         {
             _signalBus.Subscribe<ResourceCollectedSignal>(OnResourceCollectedReceived);
+            UpdateCarryCapacityUI();
         }
 
         public void Dispose()
@@ -64,12 +73,24 @@ namespace _Project.GoblinMine.Game.Inventory.Controller
 
         private void OnResourceCollectedReceived(ResourceCollectedSignal signal)
         {
+            if (signal.AutoDeposit)
+                return;
+
             var resource = _inventoryRepository.GetResourceByType(signal.ResourceType);
             resource.Amount += signal.CollectionAmount;
-            
+
             var config = _miningResourceConfigurationCollection.GetConfigurationByType(resource.ResourceType);
             var resourceView = _inventoryViewRepository.GetResourceViewById(resource.Id);
             resourceView.SetText(resource.Amount.ToString());
+
+            UpdateCarryCapacityUI();
+        }
+
+        private void UpdateCarryCapacityUI()
+        {
+            var totalCarried = _inventoryRepository.GetTotalCarried();
+            var maxCapacity = _playerRepository.Player.MaxCarryCapacity;
+            _carryCapacityView.UpdateCapacity(totalCarried, maxCapacity);
         }
     }
 }

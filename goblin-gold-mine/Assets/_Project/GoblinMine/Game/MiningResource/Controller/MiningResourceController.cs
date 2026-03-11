@@ -4,6 +4,9 @@ using Cysharp.Threading.Tasks;
 using Zenject;
 using UnityEngine;
 using _Project.Shared.Initializable;
+using _Project.GoblinMine.Game.Haptic.Command;
+using _Project.GoblinMine.Game.Inventory.Repository;
+using _Project.GoblinMine.Game.Player.Repository;
 using _Project.GoblinMine.Game.Player.View;
 using _Project.GoblinMine.Game.MiningResource.Command;
 using _Project.GoblinMine.Game.MiningResource.Configuration;
@@ -20,6 +23,9 @@ namespace _Project.GoblinMine.Game.MiningResource.Controller
         private readonly InitializeMiningResourcesCommand _initializeMiningResourcesCommand;
         private readonly CollectMiningResourceCommand _collectMiningResourceCommand;
         private readonly RespawnMiningResourceCommand _respawnMiningResourceCommand;
+        private readonly PlayerRepository _playerRepository;
+        private readonly InventoryRepository _inventoryRepository;
+        private readonly TriggerHapticCommand _triggerHapticCommand;
 
         private CancellationTokenSource _cancellationTokenSource;
 
@@ -29,7 +35,10 @@ namespace _Project.GoblinMine.Game.MiningResource.Controller
             MiningResourceViewRepository miningResourceViewRepository,
             InitializeMiningResourcesCommand initializeMiningResourcesCommand,
             CollectMiningResourceCommand collectMiningResourceCommand,
-            RespawnMiningResourceCommand respawnMiningResourceCommand)
+            RespawnMiningResourceCommand respawnMiningResourceCommand,
+            PlayerRepository playerRepository,
+            InventoryRepository inventoryRepository,
+            TriggerHapticCommand triggerHapticCommand)
         {
             _miningResourceConfigurationCollection = miningResourceConfigurationCollection;
             _miningResourceRepository = miningResourceRepository;
@@ -37,6 +46,9 @@ namespace _Project.GoblinMine.Game.MiningResource.Controller
             _initializeMiningResourcesCommand = initializeMiningResourcesCommand;
             _collectMiningResourceCommand = collectMiningResourceCommand;
             _respawnMiningResourceCommand = respawnMiningResourceCommand;
+            _playerRepository = playerRepository;
+            _inventoryRepository = inventoryRepository;
+            _triggerHapticCommand = triggerHapticCommand;
         }
 
         public void PreInitialize()
@@ -63,15 +75,25 @@ namespace _Project.GoblinMine.Game.MiningResource.Controller
 
             if (resource.RemainingDurability <= 0) return;
 
+            var totalCarried = _inventoryRepository.GetTotalCarried();
+            var player = _playerRepository.Player;
+
+            if (totalCarried >= player.MaxCarryCapacity) return;
+
             resource.CollectionTimer += Time.deltaTime;
 
-            if (resource.CollectionTimer >= resource.CollectionIntervalSeconds)
+            var interval = player.MiningIntervalSeconds;
+            if (resource.CollectionIntervalSeconds > interval)
+                interval = resource.CollectionIntervalSeconds;
+
+            if (resource.CollectionTimer >= interval)
             {
-                resource.CollectionTimer -= resource.CollectionIntervalSeconds;
+                resource.CollectionTimer -= interval;
 
                 var config = _miningResourceConfigurationCollection.GetConfigurationByType(resource.ResourceType);
 
-                _collectMiningResourceCommand.Execute(resource, resourceView, config, _cancellationTokenSource.Token).Forget();
+                _collectMiningResourceCommand.Execute(resource, resourceView, config, _cancellationTokenSource.Token, autoDeposit: false).Forget();
+                _triggerHapticCommand.Execute();
 
                 resource.RemainingDurability--;
 

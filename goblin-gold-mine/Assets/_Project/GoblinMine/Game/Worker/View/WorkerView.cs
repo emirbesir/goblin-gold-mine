@@ -3,6 +3,7 @@ using _Project.GoblinMine.Game.Inventory.Model;
 using _Project.GoblinMine.Game.Worker.Configuration;
 using DG.Tweening;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.GoblinMine.Game.Worker.View
 {
@@ -11,8 +12,17 @@ namespace _Project.GoblinMine.Game.Worker.View
         [SerializeField] private ResourceType resourceType;
         [SerializeField] private GameObject sleepEffects;
 
+        public class Factory : PlaceholderFactory<WorkerView>
+        {
+        }
+
         public ResourceType ResourceType => resourceType;
         public Guid Id { get; set; }
+
+        public void SetResourceType(ResourceType type)
+        {
+            resourceType = type;
+        }
 
         public Action<Collider> OnTriggerStayAction;
         public Action<Collider> OnTriggerExitAction;
