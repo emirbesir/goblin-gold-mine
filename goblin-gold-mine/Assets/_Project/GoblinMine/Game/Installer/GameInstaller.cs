@@ -13,6 +13,11 @@ using _Project.GoblinMine.Game.MiningResource.Configuration;
 using _Project.GoblinMine.Game.MiningResource.Controller;
 using _Project.GoblinMine.Game.MiningResource.Repository;
 using _Project.GoblinMine.Game.MiningResource.View;
+using _Project.GoblinMine.Game.Worker.Command;
+using _Project.GoblinMine.Game.Worker.Configuration;
+using _Project.GoblinMine.Game.Worker.Controller;
+using _Project.GoblinMine.Game.Worker.Repository;
+using _Project.GoblinMine.Game.Worker.View;
 using UnityEngine;
 using Zenject;
 using _Project.GoblinMine.Game.Inventory.View;
@@ -26,6 +31,11 @@ namespace _Project.GoblinMine.Game.Installer
         [SerializeField] private MiningResourceConfigurationCollection resourceConfigurationCollection;
         [SerializeField] private MiningResourceVisualConfiguration miningResourceVisualConfiguration;
         [SerializeField] private ResourceChunkVisualConfiguration resourceChunkVisualConfiguration;
+
+        [Header("Worker")]
+        [SerializeField] private WorkerConfiguration workerConfiguration;
+        [SerializeField] private WorkerVisualConfiguration workerVisualConfiguration;
+        [SerializeField] private List<WorkerView> workerViews;
 
         [Header("Views")]
         [SerializeField] private PlayerView playerView;
@@ -58,6 +68,8 @@ namespace _Project.GoblinMine.Game.Installer
             Container.Bind<MiningResourceConfigurationCollection>().FromInstance(resourceConfigurationCollection).AsSingle().NonLazy();
             Container.Bind<MiningResourceVisualConfiguration>().FromInstance(miningResourceVisualConfiguration).AsSingle().NonLazy();
             Container.Bind<ResourceChunkVisualConfiguration>().FromInstance(resourceChunkVisualConfiguration).AsSingle().NonLazy();
+            Container.Bind<WorkerConfiguration>().FromInstance(workerConfiguration).AsSingle().NonLazy();
+            Container.Bind<WorkerVisualConfiguration>().FromInstance(workerVisualConfiguration).AsSingle().NonLazy();
         }
 
         private void BindRepositories()
@@ -67,6 +79,8 @@ namespace _Project.GoblinMine.Game.Installer
             Container.Bind<MiningResourceViewRepository>().AsSingle().NonLazy();
             Container.Bind<InventoryRepository>().AsSingle().NonLazy();
             Container.Bind<InventoryViewRepository>().AsSingle().NonLazy();
+            Container.Bind<WorkerRepository>().AsSingle().NonLazy();
+            Container.Bind<WorkerViewRepository>().AsSingle().NonLazy();
         }
 
         private void BindCommands()
@@ -80,12 +94,16 @@ namespace _Project.GoblinMine.Game.Installer
             Container.Bind<InitializeMiningResourcesCommand>().AsSingle().NonLazy();
             Container.Bind<CollectMiningResourceCommand>().AsSingle().NonLazy();
             Container.Bind<RespawnMiningResourceCommand>().AsSingle().NonLazy();
+            Container.Bind<CreateWorkerModelCommand>().AsSingle().NonLazy();
+            Container.Bind<InitializeWorkersCommand>().AsSingle().NonLazy();
+            Container.Bind<WorkerMineCommand>().AsSingle().NonLazy();
         }
 
         private void BindViews()
         {
             Container.Bind<PlayerView>().FromInstance(playerView).AsSingle().NonLazy();
             Container.Bind<List<MiningResourceView>>().FromInstance(miningResourceViews).AsSingle().NonLazy();
+            Container.Bind<List<WorkerView>>().FromInstance(workerViews).AsSingle().NonLazy();
         }
 
         private void BindControllers()
@@ -94,6 +112,7 @@ namespace _Project.GoblinMine.Game.Installer
             Container.BindInterfacesAndSelfTo<PlayerController>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<InventoryController>().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<MiningResourceController>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<WorkerController>().AsSingle().NonLazy();
         }
 
         private void BindExternalReferences()
