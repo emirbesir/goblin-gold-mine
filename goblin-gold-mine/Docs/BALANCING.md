@@ -80,6 +80,81 @@ Tier  Total Yield  Multiplier vs Previous
 
 ---
 
+## Player Base Stats
+
+| Stat                    | Base Value | Unit          |
+|-------------------------|-----------|---------------|
+| Move Speed              | 5         | units/s       |
+| Mining Interval         | 0.8       | seconds       |
+| Max Carry Capacity      | 20        | resources     |
+
+---
+
+## Upgrade Cost Scaling
+
+All upgrades use **exponential cost scaling**: `baseCost × multiplier^level`
+
+### Buy Worker
+| Level | Cost  |
+|-------|-------|
+| 0     | 50    |
+| 1     | 125   |
+| 2     | 313   |
+| 3     | 781   |
+| 4     | 1,953 |
+| 5     | 4,883 |
+
+Base cost: 50, multiplier: 2.5x
+
+### Mining Speed
+| Level | Cost | Mining Interval |
+|-------|------|-----------------|
+| 0     | 30   | 0.8s → 0.7s     |
+| 1     | 60   | 0.7s → 0.6s     |
+| 2     | 120  | 0.6s → 0.5s     |
+| 3     | 240  | 0.5s → 0.4s     |
+| 4     | 480  | 0.4s → 0.3s     |
+| 5     | 960  | 0.3s → 0.2s     |
+
+Base cost: 30, multiplier: 2.0x, -0.1s per level, min 0.2s
+
+### Move Speed
+| Level | Cost | Move Speed    |
+|-------|------|---------------|
+| 0     | 25   | 5 → 6 u/s    |
+| 1     | 45   | 6 → 7 u/s    |
+| 2     | 81   | 7 → 8 u/s    |
+| 3     | 146  | 8 → 9 u/s    |
+| 4     | 263  | 9 → 10 u/s   |
+| 5     | 473  | 10 → 11 u/s  |
+
+Base cost: 25, multiplier: 1.8x, +1 unit/s per level, max 15 units/s
+
+### Carry Capacity
+| Level | Cost | Carry Capacity |
+|-------|------|----------------|
+| 0     | 20   | 20 → 25       |
+| 1     | 32   | 25 → 30       |
+| 2     | 51   | 30 → 35       |
+| 3     | 82   | 35 → 40       |
+| 4     | 131  | 40 → 45       |
+| 5     | 210  | 45 → 50       |
+
+Base cost: 20, multiplier: 1.6x, +5 per level
+
+---
+
+## Region Unlock Costs
+
+| Region          | Unlock Cost | Cumulative Cost |
+|-----------------|-------------|-----------------|
+| Silver Cavern   | 100         | 100             |
+| Gold Depths     | 500         | 600             |
+| Diamond Core    | 2,500       | 3,100           |
+| Obsidian Abyss  | 10,000      | 13,100          |
+
+---
+
 ## Resource Colors
 
 | Resource    | Hex Color | Description        |
