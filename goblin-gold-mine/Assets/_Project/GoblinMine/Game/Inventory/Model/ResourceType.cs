@@ -6,6 +6,10 @@ namespace _Project.GoblinMine.Game.Inventory.Model
         Silver,
         Gold,
         Diamond,
-        Obsidian
+        Obsidian,
+        Mithril,
+        Dragonstone,
+        Ethereal,
+        Goblinite
     }
 }

@@ -16,9 +16,9 @@ MonoBehaviour:
   displayName: Diamond
   material: {fileID: 2100000, guid: 87f36edd30d407d40b3f124942a3ed3a, type: 2}
   sprite: {fileID: 21300000, guid: 4c630db5d229b2b45b6a7f5f316839c8, type: 3}
-  economicValue: 50
+  economicValue: 20
   collectionAmount: 1
-  collectionIntervalSeconds: 5
-  chunkCount: 2
-  durability: 2
-  respawnDelaySeconds: 20
+  collectionIntervalSeconds: 3
+  chunkCount: 6
+  durability: 4
+  respawnDelaySeconds: 18

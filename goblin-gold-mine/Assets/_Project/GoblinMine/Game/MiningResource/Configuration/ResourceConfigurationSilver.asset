@@ -16,9 +16,9 @@ MonoBehaviour:
   displayName: Silver
   material: {fileID: 2100000, guid: 548ec1d48200b654cac08a53565c03b2, type: 2}
   sprite: {fileID: 21300000, guid: 408cfceb6db8b1d4fa691237a3bcc4c3, type: 3}
-  economicValue: 5
+  economicValue: 3
   collectionAmount: 1
-  collectionIntervalSeconds: 2
-  chunkCount: 5
-  durability: 4
-  respawnDelaySeconds: 12
+  collectionIntervalSeconds: 1.2
+  chunkCount: 4
+  durability: 6
+  respawnDelaySeconds: 8
