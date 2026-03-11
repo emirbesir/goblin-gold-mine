@@ -18,6 +18,7 @@ namespace _Project.GoblinMine.Game.Worker.Command
                 MiningIntervalSeconds = configuration.MiningIntervalSeconds,
                 AwakeDurationSeconds = configuration.AwakeDurationSeconds,
                 WakeUpDurationSeconds = configuration.WakeUpDurationSeconds,
+                MiningRangeUnits = configuration.MiningRangeUnits,
                 MiningTimer = 0f,
                 AwakeTimer = 0f,
                 WakeUpTimer = 0f

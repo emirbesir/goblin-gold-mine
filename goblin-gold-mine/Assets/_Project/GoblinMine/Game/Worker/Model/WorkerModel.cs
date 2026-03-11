@@ -12,6 +12,8 @@ namespace _Project.GoblinMine.Game.Worker.Model
         public float MiningIntervalSeconds { get; set; }
         public float AwakeDurationSeconds { get; set; }
         public float WakeUpDurationSeconds { get; set; }
+        public float MiningRangeUnits { get; set; }
+        public Guid TargetMiningResourceId { get; set; }
         public float MiningTimer { get; set; }
         public float AwakeTimer { get; set; }
         public float WakeUpTimer { get; set; }
